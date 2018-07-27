@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "snabbdom": "^0.7.1",
-    "snabbdom-pragma": "^2.7.0"
+    "snabbdom-pragma": "^2.7.0",
+    "snabbdom-to-html": "^5.1.1"
   }
 }

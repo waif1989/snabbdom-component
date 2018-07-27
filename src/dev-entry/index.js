@@ -4,6 +4,7 @@ import {default as classDefault} from 'snabbdom/modules/class';
 import {default as propsDefault} from 'snabbdom/modules/props';
 import {default as styleDefault} from 'snabbdom/modules/style';
 import {default as eventListenersDefault} from 'snabbdom/modules/eventlisteners';
+import toHTML from 'snabbdom-to-html';
 import DemoComponent from '../my-snabb-component';
 const patch = init([
     classDefault,
@@ -11,5 +12,8 @@ const patch = init([
     styleDefault,
     eventListenersDefault
 ]);
-patch(document.getElementById('app'), DemoComponent);
+console.log('-----', typeof DemoComponent, toHTML(DemoComponent()));
+patch(document.getElementById('app'), DemoComponent({
+    name: 'My Snabbdom'
+}));
 
