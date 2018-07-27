@@ -12,8 +12,8 @@ const patch = init([
     styleDefault,
     eventListenersDefault
 ]);
-console.log('-----', typeof DemoComponent, toHTML(DemoComponent()));
+console.log('DemoComponent:', typeof DemoComponent, toHTML(DemoComponent()));
 patch(document.getElementById('app'), DemoComponent({
-    name: 'My Snabbdom'
+    name: 'My Snabbdom',
+    type: 3
 }));
-
