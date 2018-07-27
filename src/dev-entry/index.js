@@ -1,18 +1,5 @@
-import Snabbdom from 'snabbdom-pragma';
-import {init} from 'snabbdom';
-import {default as classDefault} from 'snabbdom/modules/class';
-import {default as propsDefault} from 'snabbdom/modules/props';
-import {default as styleDefault} from 'snabbdom/modules/style';
-import {default as eventListenersDefault} from 'snabbdom/modules/eventlisteners';
-import toHTML from 'snabbdom-to-html';
+import {patch, toHTML} from '../snabbdom-engine';
 import DemoComponent from '../my-snabb-component';
-const patch = init([
-    classDefault,
-    propsDefault,
-    styleDefault,
-    eventListenersDefault
-]);
-// console.log('DemoComponent:', typeof DemoComponent, toHTML(DemoComponent()));
 const rootData = {};
 let num = 0;
 Object.defineProperty(rootData, 'num', {
