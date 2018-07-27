@@ -2,21 +2,23 @@ import Snabbdom from 'snabbdom-pragma'; // Tell .babelrc use Snabbdom.createElem
 import MyChildComponent from '../my-child-snabb-component';
 const EXPORT = ({
                     name = 'Hello World',
-                    type = 1
+                    type = 1,
+                    num = -1
                 } = {}) => {
     return (
         <div
             className="title component1"
         >
+            <p>Num: {num}</p>
             <p>{name} Component</p>
+            {MyChildComponent({
+                name: 'My Custom Child'
+            })}
             {type === 1 ? (
                 <p>type1</p>
             ) : (
                 <p>type other</p>
             )}
-            {MyChildComponent({
-                name: 'My Custom Child'
-            })}
         </div>
     );
 };
