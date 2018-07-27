@@ -8,5 +8,7 @@
         "useBuiltIns": true
       }
     }],"stage-2"],
-  "plugins": ["transform-runtime"]
+  "plugins": ["transform-runtime", ["transform-react-jsx", {
+    "pragma": "Snabbdom.createElement"
+  }]]
 }
