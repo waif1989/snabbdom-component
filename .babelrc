@@ -8,7 +8,15 @@
         "useBuiltIns": true
       }
     }],"stage-2"],
-  "plugins": ["transform-runtime", ["transform-react-jsx", {
-    "pragma": "Snabbdom.createElement"
-  }]]
+  "plugins": ["transform-runtime"],
+  "env": {
+    "vue": {
+      "plugins": ["transform-vue-jsx"]
+    },
+    "snabb": {
+      "plugins": [["transform-react-jsx", {
+        "pragma": "Snabbdom.createElement"
+      }]]
+    }
+  }
 }
