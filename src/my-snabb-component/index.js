@@ -1,15 +1,12 @@
-// import Snabbdom from 'snabbdom-pragma'; // Tell .babelrc use Snabbdom.createElement, And babel will tranform JSX into Snabbdom's 'h' function.
+import Snabbdom from 'snabbdom-pragma'; // Tell .babelrc use Snabbdom.createElement, And babel will tranform JSX into Snabbdom's 'h' function.
 // import MyChildComponent from '../my-child-snabb-component';
 import {toHTML} from '../snabbdom-engine';
+import {default as _h} from 'snabbdom/h';
 const EXPORT = ({
                     name = 'Hello World',
                     type = 1,
                     num = -1
-                } = {}, h) => {
-    let Snabbdom = null;
-    if (!h) {
-        Snabbdom = require('snabbdom-pragma');
-    }
+                } = {}, h = _h) => {
     const JSX = (
         <div
             className="title component1"

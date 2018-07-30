@@ -48,6 +48,7 @@ export default {
                     type: 3,
                     num: 1
                 }, h);
+                console.log('------', snabbDom);
                 return snabbDom
             }
         }
