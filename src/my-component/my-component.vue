@@ -74,13 +74,20 @@ export default {
             const demo = Object.create(AddComponent({
 	            num: 10
             }));
-            demo.addInit();
-            console.log('------', demo);
+            demo.comInit();
+            demo.setProp({ // This will set props property of component
+	            name: 'mySetPropName',
+                time: 30
+            });
+            demo.methods.add = function () { // This add function will replace component default add function
+                this.num = this.num + 10;
+            };
             resolve({
 	            ...demo,
                 render (h) {
-                    console.log('++++', this.num);
-                    return demo.addRender(h);
+                    demo.setThis(this);
+                    console.log('------', demo);
+                    return demo.comRender(h);
                 }
             });
         }

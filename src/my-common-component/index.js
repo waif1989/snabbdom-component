@@ -1,5 +1,6 @@
 const COMMON_COM = {
     init (OPTIONS) {
+        this.props = {};
         this.data = function () {
             return {
                 ...OPTIONS
