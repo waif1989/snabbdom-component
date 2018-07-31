@@ -6,9 +6,10 @@ const EXPORT = ({
                     name = 'Hello World',
                     type = 1,
                     num = -1
-                } = {}, h = _h) => {
+                } = {}, h = _h, ctx) => {
     const JSX = (
         <div
+            class={'title component1'}
             className="title component1"
         >
             <p>Num: {num}</p>
@@ -21,6 +22,7 @@ const EXPORT = ({
             ) : (
                 <p>type other</p>
             )}
+            <button onClick={ctx.add}>Common Component '+' Btn</button>
         </div>
     );
     return JSX;

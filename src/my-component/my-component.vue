@@ -42,12 +42,29 @@ export default {
             }
         }*/
         'my-snabb-component': {
+            data () {
+                return {
+                    testNum: 10
+                };
+            },
+	        created () {
+                this.testNum = 20;
+	        },
+	        mounted () {
+                this.testNum = 30;
+	        },
+	        methods: {
+                add () {
+                    this.testNum++;
+                    console.log('this.testNum', this.testNum);
+                }
+	        },
             render (h) {
                 const snabbDom = DemoComponent({
                     name: 'My Snabbdom',
                     type: 3,
-                    num: 1
-                }, h);
+                    num: this.testNum
+                }, h, this);
                 console.log('------', snabbDom);
                 return snabbDom
             }

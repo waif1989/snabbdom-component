@@ -38,7 +38,7 @@ import Vue from 'vue';
 import MyComponent from '../my-component';
 import {patch} from '../snabbdom-engine';
 import SnabbComponent from '../my-snabb-component';
-/*new Vue({
+new Vue({
     el: '#vueApp',
     components: {
         MyComponent
@@ -49,11 +49,12 @@ import SnabbComponent from '../my-snabb-component';
     methods: {
     
     }
-});*/
-let oldNode = document.getElementById('snabbApp');
+});
+/*let oldNode = document.getElementById('snabbApp');
 let newNode = SnabbComponent({
     name: 'My Snabbdom',
     type: 3,
     num: 0
 });
-patch(oldNode, newNode);
+console.log('------', newNode);
+patch(oldNode, newNode);*/
