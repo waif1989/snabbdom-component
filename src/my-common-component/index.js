@@ -1,15 +1,14 @@
 const COMMON_COM = {
-    init (JSX, OPTIONS) {
-        this.JSX = JSX;
-        this.OPTIONS = OPTIONS;
-    },
-    data () {
-        return {
-            ...this.OPTIONS
+    init (OPTIONS) {
+        this.data = function () {
+            return {
+                ...OPTIONS
+            }
         };
+        this.methods = {}
     },
-    render () {
-        return this.JSX
+    render (JSX) {
+        return JSX
     }
 };
 module.exports = exports = COMMON_COM;

@@ -1,30 +1,19 @@
 import {default as defaultH} from 'snabbdom/h';
 import COMMON_COM from '../my-common-component';
-const ADD_COM = Object.setPrototypeOf({}, COMMON_COM);
-
-const ADD_COM_FN = (_h, {
+const ADD_COM_FN = ({
     num = 0
 } = {}) => {
-    const h = _h || defaultH;
+    const ADD_COM = Object.setPrototypeOf({}, COMMON_COM);
     const OPTIONS = {
         num: num
     };
-    const JSX = (
-        <div>
-            <button>My Add Component '+' Btn</button>
-            <div>{num}</div>
-        </div>
-    );
-    
-    ADD_COM.addInit = function ({} = JSX, {} = OPTIONS) {
-        this.init(JSX, OPTIONS);
+    ADD_COM.addInit = function ({} = OPTIONS) {
+        this.init(OPTIONS);
         return this;
     };
-    ADD_COM.data = function data () {
-        this.data();
-    };
-    ADD_COM.addRender = function () {
-        return this.render();
+    ADD_COM.addRender = function (vnodeFn = defaultH) {
+        const JSX = require('./ui')(num, vnodeFn);
+        return this.render(JSX);
     };
     return ADD_COM
 };

@@ -1,4 +1,4 @@
-const JSX_FN = (num) => {
+const JSX_FN = (num, h) => {
     return (
         <div>
             <button>My Add Component '+' Btn</button>

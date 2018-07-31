@@ -71,28 +71,19 @@ export default {
             }
         }*/
         'my-snabb-component': (resolve) => {
-            const $_data = {
-                num: 1
-            };
+            const demo = Object.create(AddComponent({
+	            num: 10
+            }));
+            demo.addInit();
+            console.log('------', demo);
             resolve({
-	            data () {
-	                return {
-		                ...$_data
-	                };
-	            },
+	            ...demo,
                 render (h) {
-                    const o = Object.create(AddComponent(h, $_data));
-                    console.log('------', this.num, o.addInit().addRender());
-                    return o.addInit().addRender();
+                    console.log('++++', this.num);
+                    return demo.addRender(h);
                 }
-            })
+            });
         }
-	},
-	created () {
-        /*const o = Object.create(AddComponent);
-        o.addInit();
-        o.setup();
-        console.log('===', o.setup());*/
 	},
 	methods: {
         add () {
