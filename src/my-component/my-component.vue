@@ -10,6 +10,7 @@
 
 <script>
 import DemoComponent from '../my-snabb-component';
+import AddComponent from '../my-add-component';
 export default {
     name: 'MyComponent',
 	data () {
@@ -41,7 +42,7 @@ export default {
                 return createElement(snabbDom.sel, snabbDom.data.props, snabbDom.children);
             }
         }*/
-        'my-snabb-component': {
+        /*'my-snabb-component': {
             data () {
                 return {
                     testNum: 10
@@ -68,7 +69,30 @@ export default {
                 console.log('------', snabbDom);
                 return snabbDom
             }
+        }*/
+        'my-snabb-component': (resolve) => {
+            const $_data = {
+                num: 1
+            };
+            resolve({
+	            data () {
+	                return {
+		                ...$_data
+	                };
+	            },
+                render (h) {
+                    const o = Object.create(AddComponent(h, $_data));
+                    console.log('------', this.num, o.addInit().addRender());
+                    return o.addInit().addRender();
+                }
+            })
         }
+	},
+	created () {
+        /*const o = Object.create(AddComponent);
+        o.addInit();
+        o.setup();
+        console.log('===', o.setup());*/
 	},
 	methods: {
         add () {
