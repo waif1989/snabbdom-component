@@ -1,17 +1,20 @@
 import {default as defaultH} from 'snabbdom/h';
 import COMMON_COM from '../my-common-component';
 const ADD_COM_FN = ({
-    num = 0
-} = {}) => {
-    const ADD_COM = Object.setPrototypeOf({}, COMMON_COM);
-    const OPTIONS = {
-        num: num
+    name = 'AddComponent'
+                    } = {}) => {
+    const DEFAULT_DATA = {
+        num: 0
     };
-    ADD_COM.comInit = function ({} = OPTIONS) {
-        this.init(OPTIONS);
-        this.methods.add = function () {
-            this.ctx.num = this.ctx.num + 1;
-        }.bind(this);
+    const ADD_COM = Object.setPrototypeOf({}, COMMON_COM);
+    ADD_COM.comInit = function ({} = DEFAULT_DATA) {
+        this.init(DEFAULT_DATA);
+        this.name = name;
+        this.methods = {
+            add () {
+                this.num = this.num + 1;
+            }
+        };
         this.props = {
             name: {
                 type: String,
@@ -26,10 +29,6 @@ const ADD_COM_FN = ({
     };
     ADD_COM.setThis = function (ctx) {
         this.ctx = ctx;
-    };
-    ADD_COM.setProp = function (option) {
-        this.props.name.default = option.name;
-        this.props.time.default = option.time;
     };
     ADD_COM.comRender = function (h = defaultH) {
         const JSX = (

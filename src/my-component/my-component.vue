@@ -4,7 +4,10 @@
 		<div>Vue Num:&nbsp;{{vueNum}}</div>
 		<button @click="add">Vue VDOM '+' Btn</button>
 		<div>-------Snabb-component In Vue Component↓--------</div>
-		<my-snabb-component></my-snabb-component>
+		<my-snabb-component
+			:name="'mySetPropName'"
+			:time="30"
+		></my-snabb-component>
 	</div>
 </template>
 
@@ -71,17 +74,10 @@ export default {
             }
         }*/
         'my-snabb-component': (resolve) => {
-            const demo = Object.create(AddComponent({
-	            num: 10
-            }));
-            demo.comInit();
-            demo.setProp({ // This will set props property of component
-	            name: 'mySetPropName',
-                time: 30
-            });
-            demo.methods.add = function () { // This add function will replace component default add function
-                this.num = this.num + 10;
-            };
+            const demo = Object.create(AddComponent({name: 'MyAddComponent'})).comInit(); // Auto Init component
+            // demo.methods.add = function () { // This add function will replace component's default 'add' function
+            //     this.num = this.num + 10;
+            // };
             resolve({
 	            ...demo,
                 render (h) {

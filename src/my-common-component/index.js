@@ -1,12 +1,22 @@
 const COMMON_COM = {
-    init (OPTIONS) {
+    init (DEFAULT_DATA) {
+        this.name = 'CommonComponent';
         this.props = {};
+        this.components = {};
         this.data = function () {
             return {
-                ...OPTIONS
+                ...DEFAULT_DATA
             }
         };
-        this.methods = {}
+        this.watch = {};
+        this.computed = {};
+        this.beforeCreate = function () {};
+        this.created = function () {};
+        this.beforeMount = function () {};
+        this.mounted = function () {};
+        this.beforeDestroy = function () {};
+        this.destroyed = function () {};
+        this.methods = {};
     },
     render (JSX) {
         return JSX
