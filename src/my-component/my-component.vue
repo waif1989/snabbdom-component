@@ -3,10 +3,11 @@
 		<div>My vue component</div>
 		<div>Vue Num:&nbsp;{{vueNum}}</div>
 		<button @click="add">Vue VDOM '+' Btn</button>
-		<div>-------Snabb-component In Vue Component↓--------</div>
+		<div>-------My-Common-Addcomponent In Vue Component↓--------</div>
 		<my-snabb-component
 			:name="'mySetPropName'"
 			:time="30"
+			@addCb="addCbFn"
 		></my-snabb-component>
 	</div>
 </template>
@@ -74,16 +75,16 @@ export default {
             }
         }*/
         'my-snabb-component': (resolve) => {
-            const demo = Object.create(AddComponent({name: 'MyAddComponent'})).comInit(); // Auto Init component
-            // demo.methods.add = function () { // This add function will replace component's default 'add' function
+            const demoComponent = Object.create(AddComponent({name: 'MyAddComponent'})).initCom(); // Auto Init component
+            // demoComponent.methods.add = function () { // This add function will replace component's default 'add' function
             //     this.num = this.num + 10;
             // };
+            console.log('demoComponent:', demoComponent);
             resolve({
-	            ...demo,
-                render (h) {
-                    demo.setThis(this);
-                    console.log('------', demo);
-                    return demo.comRender(h);
+	            ...demoComponent,
+                render (h) { // If data are changed in component that component will render again
+                    demoComponent.setThis(this);
+                    return demoComponent.renderCom(h);
                 }
             });
         }
@@ -91,6 +92,9 @@ export default {
 	methods: {
         add () {
             this.vueNum = this.vueNum + 1;
+        },
+        addCbFn (val) {
+            console.log('addCbFn:', val);
         }
 	}
 }
