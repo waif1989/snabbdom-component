@@ -10,12 +10,6 @@ const ADD_COM_FN = ({
     ADD_COM.initCom = function () {
         this.init(data);
         this.name = name;
-        this.methods = {
-            add () {
-                this.num = this.num + 1;
-                this.$emit('addCb', this.num);
-            }
-        };
         this.props = {
             name: {
                 type: String,
@@ -24,6 +18,19 @@ const ADD_COM_FN = ({
             time: {
                 type: Number,
                 default: 1
+            }
+        };
+        this.created = function () {
+            this.num = this.num + 1;
+            console.log('Component Create:', this.num);
+        };
+        this.mounted = function () {
+            console.log('Component Mounted:', this.num);
+        };
+        this.methods = {
+            add () {
+                this.num = this.num + 1;
+                this.$emit('addCb', this.num);
             }
         };
         return this;
@@ -41,7 +48,7 @@ const ADD_COM_FN = ({
                 >
                     My Add Component '+' Btn
                 </button>
-                <div>{this.ctx.num}</div>
+                <div>This Data Name: {this.ctx.num}</div>
                 <div>This Prop Name: {this.ctx.name}, This Prop Time: {this.ctx.time}</div>
             </div>
         );
