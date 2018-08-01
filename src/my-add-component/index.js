@@ -1,5 +1,6 @@
 import {default as defaultH} from 'snabbdom/h';
 import COMMON_COM from '../my-common-component';
+import './index.less';
 const ADD_COM_FN = ({
     name = 'AddComponent'
                     } = {}) => {
@@ -36,6 +37,9 @@ const ADD_COM_FN = ({
             add: function () {
                 this.num = this.num + 1;
                 this.$emit('addCb', this.num);
+            },
+            reduce: function () {
+                this.num = this.num - 1;
             }
         };
         return this;
@@ -45,15 +49,23 @@ const ADD_COM_FN = ({
     };
     ADD_COM.renderCom = function (ins = this, h = defaultH) {
         const JSX = (
-            <div>
+            <div
+                className="my-component-container"
+                class="my-component-container"
+            >
                 <button
-                    onClick={this.add}
                     className={this.name}
                     class={this.name}
+                    onClick={this.add}
                 >
                     My Add Component '+' Btn
                 </button>
-                <div>This Data Num: {this.num}</div>
+                <button
+                    onClick={this.reduce}
+                >
+                    My Add Component '-' Btn
+                </button>
+                <div class={{'text-red':this.num > 2}}>This Data Num: {this.num}</div>
                 <div>This Computed Num: {this.numComputed}</div>
                 <div>This Prop Name: {this.name}, This Prop Time: {this.time}</div>
             </div>
