@@ -20,15 +20,20 @@ const ADD_COM_FN = ({
                 default: 1
             }
         };
+        this.computed = {
+            numComputed: function () {
+                return this.num * 2;
+            }
+        };
         this.created = function () {
-            this.num = this.num + 1;
             console.log('Component Create:', this.num);
+            this.num = this.num + 1;
         };
         this.mounted = function () {
             console.log('Component Mounted:', this.num);
         };
         this.methods = {
-            add () {
+            add: function () {
                 this.num = this.num + 1;
                 this.$emit('addCb', this.num);
             }
@@ -38,21 +43,22 @@ const ADD_COM_FN = ({
     ADD_COM.setThis = function (ctx) {
         this.ctx = ctx;
     };
-    ADD_COM.renderCom = function (h = defaultH) {
+    ADD_COM.renderCom = function (ins = this, h = defaultH) {
         const JSX = (
             <div>
                 <button
-                    onClick={this.ctx.add}
-                    className={this.ctx.name}
-                    class={this.ctx.name}
+                    onClick={this.add}
+                    className={this.name}
+                    class={this.name}
                 >
                     My Add Component '+' Btn
                 </button>
-                <div>This Data Name: {this.ctx.num}</div>
-                <div>This Prop Name: {this.ctx.name}, This Prop Time: {this.ctx.time}</div>
+                <div>This Data Num: {this.num}</div>
+                <div>This Computed Num: {this.numComputed}</div>
+                <div>This Prop Name: {this.name}, This Prop Time: {this.time}</div>
             </div>
         );
-        return this.render(JSX);
+        return ins.render(JSX);
     };
     return ADD_COM
 };

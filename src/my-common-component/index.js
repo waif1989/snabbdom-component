@@ -1,5 +1,5 @@
 const COMMON_COM = {
-    init (DEFAULT_DATA) {
+    init: function (DEFAULT_DATA) {
         this.name = 'CommonComponent';
         this.props = {};
         this.components = {};
@@ -18,7 +18,7 @@ const COMMON_COM = {
         this.destroyed = function () {};
         this.methods = {};
     },
-    render (JSX) {
+    render: function (JSX) {
         return JSX
     }
 };

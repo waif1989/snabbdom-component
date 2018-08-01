@@ -83,8 +83,7 @@ export default {
             resolve({
 	            ...demoComponent,
                 render (h) { // If data are changed in component that component will render again
-                    demoComponent.setThis(this);
-                    return demoComponent.renderCom(h);
+                    return demoComponent.renderCom.call(this, demoComponent, h);
                 }
             });
         }
