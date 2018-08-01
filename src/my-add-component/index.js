@@ -1,4 +1,5 @@
 import {default as defaultH} from 'snabbdom/h';
+import React from 'react';
 import COMMON_COM from '../my-common-component';
 import './index.less';
 const ADD_COM_FN = ({

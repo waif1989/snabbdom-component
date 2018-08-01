@@ -35,10 +35,15 @@ const update = (num) => {
 };
 patch(oldNode, newNode);*/
 import Vue from 'vue';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import AddComponent from '../my-add-component';
 import MyComponent from '../my-component';
 import {patch} from '../snabbdom-engine';
 import SnabbComponent from '../my-snabb-component';
-new Vue({
+
+
+/*new Vue({
     el: '#vueApp',
     components: {
         MyComponent
@@ -49,7 +54,26 @@ new Vue({
     methods: {
     
     }
-});
+});*/
+
+class MyAddComponent extends React.Component {
+    init () {
+        const demoComponent = Object.create(AddComponent({name: 'MyAddComponent'})).initCom();
+        return demoComponent.renderCom.call(this, demoComponent, React);
+    }
+    render () {
+        // return <div>Hello {this.props.name}</div>;
+        return this.init();
+    }
+}
+ReactDOM.render(
+    <MyAddComponent
+        name="'mySetPropName'"
+        time="30" />,
+    document.getElementById('reactApp')
+);
+
+
 /*let oldNode = document.getElementById('snabbApp');
 let newNode = SnabbComponent({
     name: 'My Snabbdom',

@@ -13,6 +13,13 @@
     "vue": {
       "plugins": ["transform-vue-jsx"]
     },
+    "react": {
+      "plugins": [
+        ["transform-react-jsx", {
+          "pragma": "React.createElement"
+        }]
+      ]
+    },
     "snabb": {
       "plugins": [["transform-react-jsx", {
         "pragma": "Snabbdom.createElement"

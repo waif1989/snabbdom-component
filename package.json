@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:vue:dev": "cross-env NODE_ENV=development BABEL_ENV=vue node_modules/.bin/webpack-dev-server --config webpack.dev.js --port 9081 --open --mode=development",
+    "start:vue:react": "cross-env NODE_ENV=development BABEL_ENV=react node_modules/.bin/webpack-dev-server --config webpack.dev.js --port 9081 --open --mode=development",
     "start:snabb:dev": "cross-env NODE_ENV=development BABEL_ENV=snabb node_modules/.bin/webpack-dev-server --config webpack.dev.js --port 9081 --open --mode=development",
     "build": "cross-env NODE_ENV=production node_modules/.bin/webpack --config webpack.prod.js --mode=production",
     "test": "mocha"
@@ -38,6 +39,8 @@
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "path": "^0.12.7",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
