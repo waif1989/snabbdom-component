@@ -76,9 +76,6 @@ export default {
         }*/
         'my-snabb-component': (resolve) => {
             const demoComponent = Object.create(AddComponent({name: 'MyAddComponent'})).initCom(); // Auto Init component
-            // demoComponent.methods.add = function () { // This add function will replace component's default 'add' function
-            //     this.num = this.num + 10;
-            // };
             console.log('demoComponent:', demoComponent);
             resolve({
 	            ...demoComponent,
