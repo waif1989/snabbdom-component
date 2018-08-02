@@ -4,8 +4,11 @@ import AddComponent from '../my-add-component';
 class MyAddComponent extends React.Component {
     constructor (props) {
         super(props);
+        this.demo = Object.create(AddComponent({name: 'MyAddComponent', frameWork: 'react'}));
     }
-    componentWillMount () {}
+    componentWillMount () {
+        this.demo.initCom.call(this);
+    }
     componentDidMount () {}
     init () {
         const demoComponent = Object.create(AddComponent({name: 'MyAddComponent', frameWork: 'react'}));
@@ -15,22 +18,9 @@ class MyAddComponent extends React.Component {
     }
     render () {
         // return <div>Hello {this.props.name}</div>;
-        return this.init();
+        // return this.init();
+        return this.demo.renderCom.call(this, this.demo, React);
     }
 }
-
-/*class Test extends React.Component {
-    render () {
-        console.log('===', this);
-        return <div>Hello {this.props.name}</div>;
-    }
-}
-Test.prototype = Object.assign(Test.prototype, Object.create(AddComponent({name: 'MyAddComponent', frameWork: 'react'})).initCom());
-class MyAddComponent extends Test {
-    constructor (props) {
-        super(props);
-        return new Test();
-    }
-}*/
 
 export default MyAddComponent;
