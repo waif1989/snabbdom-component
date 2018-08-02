@@ -5,6 +5,8 @@ class MyAddComponent extends React.Component {
     constructor (props) {
         super(props);
     }
+    componentWillMount () {}
+    componentDidMount () {}
     init () {
         const demoComponent = Object.create(AddComponent({name: 'MyAddComponent', frameWork: 'react'}));
         demoComponent.initCom.call(this);

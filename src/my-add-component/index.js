@@ -23,6 +23,18 @@ const ADD_COM_FN = ({
                 default: 1
             }
         });
+        ADD_COM.setComputedVal.call(this, {
+            numComputed: function () {
+                return this.num * 2;
+            }
+        });
+        ADD_COM.setCreateWillMount.call(this, function () {
+            console.log('Component Create:', this.num);
+            this.num = this.num + 1;
+        });
+        ADD_COM.setMountedDidMount.call(this, function () {
+            console.log('Component Mounted:', this.num);
+        });
         ADD_COM.setMethods.call(this, {
             add: function () {
                 this.num = this.num + 1;
@@ -75,19 +87,19 @@ const ADD_COM_FN = ({
                 class="my-component-container"
             >
                 <button
-                    className={this.name}
-                    class={this.name}
-                    onClick={this.add}
+                    className={ins.getPropsVal.call(this, 'name')}
+                    class={ins.getPropsVal.call(this, 'name')}
+                    onClick={ins.invokeFn.call(this, 'add')}
                 >
                     My Add Component '+' Btn
                 </button>
                 <button
-                    onClick={this.reduce}
+                    onClick={ins.invokeFn.call(this, 'reduce')}
                 >
                     My Add Component '-' Btn
                 </button>
-                <div class={{'text-red':this.num > 2}}>This Data Num: {this.num}</div>
-                <div>This Computed Num: {this.numComputed}</div>
+                <div class={{'text-red':ins.getDataStateVal.call(this, 'num') > 2}}>This Data Num: {ins.getDataStateVal.call(this, 'num')}</div>
+                <div>This Computed Num: {ins.getComputedVal.call(this, 'numComputed')}</div>
                 <div>This Prop Name: {ins.getPropsVal.call(this, 'name')}, This Prop Time: {ins.getPropsVal.call(this, 'time')}</div>
             </div>
         );

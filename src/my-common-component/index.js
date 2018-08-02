@@ -31,9 +31,45 @@ const COMMON_COM = {
             return this.props[val];
         }
     },
+    getDataStateVal: function (val) {
+        if (!this._reactInternalInstance) {
+            return this[val];
+        } else {
+            return this.state[val];
+        }
+    },
+    getComputedVal: function (val) {
+        if (!this._reactInternalInstance) {
+            return this[val];
+        }
+    },
+    invokeFn: function (fnName) {
+        if (!this._reactInternalInstance) {
+            return this[fnName];
+        } else {
+            return this.methods[fnName].bind(this);
+        }
+    },
     setPropsVal: function (props) {
         if (!this._reactInternalInstance) {
             this.props = props;
+        }
+    },
+    setComputedVal: function (computed) {
+        this.computed = computed;
+    },
+    setCreateWillMount: function (fn) {
+        if (!this._reactInternalInstance) {
+            this.created = fn;
+        } else {
+            this.componentWillMount = fn;
+        }
+    },
+    setMountedDidMount: function (fn) {
+        if (!this._reactInternalInstance) {
+            this.mounted = fn
+        } else {
+            this.componentDidMount = fn;
         }
     },
     setMethods: function (methods) {

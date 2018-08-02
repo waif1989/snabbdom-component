@@ -46,7 +46,8 @@ import {patch} from '../snabbdom-engine';
 import SnabbComponent from '../my-snabb-component';
 
 
-/*new Vue({
+/*
+new Vue({
     el: '#vueApp',
     components: {
         MyVueComponent
@@ -57,7 +58,8 @@ import SnabbComponent from '../my-snabb-component';
     methods: {
     
     }
-});*/
+});
+*/
 
 ReactDOM.render(
     <MyReactComponent
