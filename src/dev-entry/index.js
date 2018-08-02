@@ -61,7 +61,7 @@ import SnabbComponent from '../my-snabb-component';
 
 ReactDOM.render(
     <MyReactComponent
-        name="'mySetPropName'"
+        name="myReactPropName"
         time="30" />,
     document.getElementById('reactApp')
 );

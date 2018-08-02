@@ -5,7 +5,7 @@
 		<button @click="add">Vue VDOM '+' Btn</button>
 		<div>-------My-Common-Addcomponent In Vue Component↓--------</div>
 		<my-snabb-component
-			:name="'mySetPropName'"
+			:name="'myVuePropName'"
 			:time="30"
 			@addCb="addCbFn"
 		></my-snabb-component>
@@ -75,7 +75,7 @@ export default {
             }
         }*/
         'my-snabb-component': (resolve) => {
-            const demoComponent = Object.create(AddComponent({name: 'MyAddComponent'})).initCom(); // Auto Init component
+            const demoComponent = Object.create(AddComponent({name: 'MyAddComponent', frameWork: 'vue'})).initCom(); // Auto Init component
             console.log('demoComponent:', demoComponent);
             resolve({
 	            ...demoComponent,

@@ -11,8 +11,30 @@ const ADD_COM_FN = ({
     };
     const ADD_COM = Object.setPrototypeOf({}, COMMON_COM);
     ADD_COM.initCom = function () {
-        this.init(data_state);
         this.name = name;
+        ADD_COM.init.call(this, data_state, frameWork);
+        ADD_COM.setPropsVal.call(this, {
+            name: {
+                type: String,
+                default: 'defaultPropName'
+            },
+            time: {
+                type: Number,
+                default: 1
+            }
+        });
+        ADD_COM.setMethods.call(this, {
+            add: function () {
+                this.num = this.num + 1;
+                this.$emit('addCb', this.num);
+            },
+            reduce: function () {
+                this.num = this.num - 1;
+            }
+        });
+        return this;
+        /*this.init(data_state, frameWork);
+       
         this.props = {
             name: {
                 type: String,
@@ -44,10 +66,7 @@ const ADD_COM_FN = ({
                 this.num = this.num - 1;
             }
         };
-        return this;
-    };
-    ADD_COM.setThis = function (ctx) {
-        this.ctx = ctx;
+        return this;*/
     };
     ADD_COM.renderCom = function (ins = this, h = defaultH) {
         const JSX = (
@@ -69,7 +88,7 @@ const ADD_COM_FN = ({
                 </button>
                 <div class={{'text-red':this.num > 2}}>This Data Num: {this.num}</div>
                 <div>This Computed Num: {this.numComputed}</div>
-                <div>This Prop Name: {this.name}, This Prop Time: {this.time}</div>
+                <div>This Prop Name: {ins.getPropsVal.call(this, 'name')}, This Prop Time: {ins.getPropsVal.call(this, 'time')}</div>
             </div>
         );
         return ins.render(JSX);
