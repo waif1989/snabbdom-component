@@ -34,11 +34,14 @@ const update = (num) => {
     console.log('New Html String:---', toHTML(newNode));
 };
 patch(oldNode, newNode);*/
+
 import Vue from 'vue';
+import MyVueComponent from '../my-vue-component';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AddComponent from '../my-add-component';
-import MyComponent from '../my-component';
+import MyReactComponent from '../my-react-component';
+
 import {patch} from '../snabbdom-engine';
 import SnabbComponent from '../my-snabb-component';
 
@@ -46,7 +49,7 @@ import SnabbComponent from '../my-snabb-component';
 /*new Vue({
     el: '#vueApp',
     components: {
-        MyComponent
+        MyVueComponent
     },
     data: {
     
@@ -56,18 +59,8 @@ import SnabbComponent from '../my-snabb-component';
     }
 });*/
 
-class MyAddComponent extends React.Component {
-    init () {
-        const demoComponent = Object.create(AddComponent({name: 'MyAddComponent'})).initCom();
-        return demoComponent.renderCom.call(this, demoComponent, React);
-    }
-    render () {
-        // return <div>Hello {this.props.name}</div>;
-        return this.init();
-    }
-}
 ReactDOM.render(
-    <MyAddComponent
+    <MyReactComponent
         name="'mySetPropName'"
         time="30" />,
     document.getElementById('reactApp')

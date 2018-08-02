@@ -3,14 +3,15 @@ import React from 'react';
 import COMMON_COM from '../my-common-component';
 import './index.less';
 const ADD_COM_FN = ({
-    name = 'AddComponent'
-                    } = {}) => {
-    const data = {
+    name = 'AddComponent',
+    frameWork = 'dom'
+} = {}) => {
+    const data_state = {
         num: 0
     };
     const ADD_COM = Object.setPrototypeOf({}, COMMON_COM);
     ADD_COM.initCom = function () {
-        this.init(data);
+        this.init(data_state);
         this.name = name;
         this.props = {
             name: {
