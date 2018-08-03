@@ -1,7 +1,8 @@
 const COMMON_COM = {
     init: function (DEFAULT_DATA, frameWork) {
+        this.name = 'CommonComponent';
+        this.frameWork = frameWork;
         if (frameWork === 'vue') {
-            this.name = 'CommonComponent';
             this.props = {};
             this.components = {};
             this.data = function () {
@@ -19,8 +20,13 @@ const COMMON_COM = {
             this.destroyed = function () {};
             this.methods = {};
         } else if (frameWork === 'react') {
-            this.state = {
+            /*this.state = {
                 ...DEFAULT_DATA
+            }*/
+            this.getInitialState = function () {
+                return {
+                    ...DEFAULT_DATA
+                }
             }
         } else {}
     },
@@ -50,25 +56,31 @@ const COMMON_COM = {
             return this.methods[fnName].bind(this);
         }
     },
-    setPropsVal: function (props) {
-        if (!this._reactInternalInstance) {
+    setPropsVal: function (props, frameWork) {
+        if (this.frameWork === 'vue') {
             this.props = props;
+        } else if (this.frameWork === 'react') {
+            this.getDefaultProps = function () {
+                return {
+                    ...props
+                }
+            }
         }
     },
     setComputedVal: function (computed) {
         this.computed = computed;
     },
     setCreateWillMount: function (fn) {
-        if (!this._reactInternalInstance) {
+        if (this.frameWork === 'vue') {
             this.created = fn;
-        } else {
+        } else if (this.frameWork === 'react') {
             this.componentWillMount = fn;
         }
     },
     setMountedDidMount: function (fn) {
-        if (!this._reactInternalInstance) {
+        if (this.frameWork === 'vue') {
             this.mounted = fn
-        } else {
+        } else if (this.frameWork === 'react') {
             this.componentDidMount = fn;
         }
     },

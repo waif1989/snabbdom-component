@@ -12,8 +12,8 @@ const ADD_COM_FN = ({
     const ADD_COM = Object.setPrototypeOf({}, COMMON_COM);
     ADD_COM.initCom = function () {
         this.name = name;
-        ADD_COM.init.call(this, data_state, frameWork);
-        ADD_COM.setPropsVal.call(this, {
+        this.init(data_state, frameWork);
+        this.setPropsVal({
             name: {
                 type: String,
                 default: 'defaultPropName'
@@ -23,19 +23,19 @@ const ADD_COM_FN = ({
                 default: 1
             }
         });
-        ADD_COM.setComputedVal.call(this, {
+        this.setComputedVal({
             numComputed: function () {
                 return this.num * 2;
             }
         });
-        ADD_COM.setCreateWillMount.call(this, function () {
+        this.setCreateWillMount(function () {
             console.log('Component Create:', this.num);
             this.num = this.num + 1;
         });
-        ADD_COM.setMountedDidMount.call(this, function () {
+        this.setMountedDidMount(function () {
             console.log('Component Mounted:', this.num);
         });
-        ADD_COM.setMethods.call(this, {
+        this.setMethods({
             add: function () {
                 this.num = this.num + 1;
                 this.$emit('addCb', this.num);
@@ -45,40 +45,39 @@ const ADD_COM_FN = ({
             }
         });
         return this;
-        /*this.init(data_state, frameWork);
-       
-        this.props = {
-            name: {
-                type: String,
-                default: 'defaultPropName'
-            },
-            time: {
-                type: Number,
-                default: 1
-            }
-        };
-        this.computed = {
-            numComputed: function () {
-                return this.num * 2;
-            }
-        };
-        this.created = function () {
-            console.log('Component Create:', this.num);
-            this.num = this.num + 1;
-        };
-        this.mounted = function () {
-            console.log('Component Mounted:', this.num);
-        };
-        this.methods = {
-            add: function () {
-                this.num = this.num + 1;
-                this.$emit('addCb', this.num);
-            },
-            reduce: function () {
-                this.num = this.num - 1;
-            }
-        };
-        return this;*/
+        // ADD_COM.init.call(this, data_state, frameWork);
+        // ADD_COM.setPropsVal.call(this, {
+        //     name: {
+        //         type: String,
+        //         default: 'defaultPropName'
+        //     },
+        //     time: {
+        //         type: Number,
+        //         default: 1
+        //     }
+        // }, frameWork);
+        // ADD_COM.setComputedVal.call(this, {
+        //     numComputed: function () {
+        //         return this.num * 2;
+        //     }
+        // });
+        // ADD_COM.setCreateWillMount.call(this, function () {
+        //     console.log('Component Create:', this.num);
+        //     this.num = this.num + 1;
+        // });
+        // ADD_COM.setMountedDidMount.call(this, function () {
+        //     console.log('Component Mounted:', this.num);
+        // });
+        // ADD_COM.setMethods.call(this, {
+        //     add: function () {
+        //         this.num = this.num + 1;
+        //         this.$emit('addCb', this.num);
+        //     },
+        //     reduce: function () {
+        //         this.num = this.num - 1;
+        //     }
+        // });
+        // return this;
     };
     ADD_COM.renderCom = function (ins = this, h = defaultH) {
         const JSX = (
