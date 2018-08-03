@@ -33,7 +33,7 @@ const COMMON_COM = {
                 return this.state[val];
             }
         };
-        this.changeDataStateVal = function (target, newVal) {
+        this.updateDataStateVal = function (target, newVal) {
             if (frameWork === 'vue') {
                 this[target] = newVal;
             } else if (frameWork === 'react') {

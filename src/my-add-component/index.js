@@ -14,7 +14,7 @@ const ADD_COM_FN = ({
         this.init(data_state, frameWork);
         this.name = name;
         const getDataStateVal = this.getDataStateVal;
-        const changeDataStateVal = this.changeDataStateVal;
+        const updateDataStateVal = this.updateDataStateVal;
         this.setPropsVal({
             name: {
                 type: String,
@@ -32,7 +32,7 @@ const ADD_COM_FN = ({
         });
         this.setCreateWillMount(function () {
             console.log('Component Create & ComponentWillMount:', getDataStateVal.call(this, 'num'));
-            changeDataStateVal.call(this, 'num', (() => {
+            updateDataStateVal.call(this, 'num', (() => {
                 let temp = getDataStateVal.call(this, 'num');
                 return ++temp;
             })());
@@ -42,7 +42,7 @@ const ADD_COM_FN = ({
         });
         this.setMethods({
             add: function () {
-                changeDataStateVal.call(this, 'num', (() => {
+                updateDataStateVal.call(this, 'num', (() => {
                     let temp = getDataStateVal.call(this, 'num');
                     return ++temp;
                 })());
@@ -50,7 +50,7 @@ const ADD_COM_FN = ({
                 // this.$emit('addCb', this.num);
             },
             reduce: function () {
-                changeDataStateVal.call(this, 'num', (() => {
+                updateDataStateVal.call(this, 'num', (() => {
                     let temp = getDataStateVal.call(this, 'num');
                     return --temp;
                 })());
@@ -100,11 +100,11 @@ const ADD_COM_FN = ({
         const JSX = (
             <div
                 className="my-component-container"
-                class="my-component-container"
+                // class="my-component-container"
             >
                 <button
                     className={getPropsVal.call(this, 'name')}
-                    class={getPropsVal.call(this, 'name')}
+                    // class={getPropsVal.call(this, 'name')}
                     onClick={invokeFn.call(this, 'add')}
                 >
                     My Add Component '+' Btn
@@ -114,7 +114,12 @@ const ADD_COM_FN = ({
                 >
                     My Add Component '-' Btn
                 </button>
-                <div class={{'text-red':getDataStateVal.call(this, 'num') > 2}}>This Data Num: {getDataStateVal.call(this, 'num')}</div>
+                <div
+                    className={{'text-red':getDataStateVal.call(this, 'num') > 2}}
+                    // class={{'text-red':getDataStateVal.call(this, 'num') > 2}}
+                >
+                    This Data Num: {getDataStateVal.call(this, 'num')}
+                </div>
                 <div>This Computed Num: {getComputedVal.call(this, 'numComputed')}</div>
                 <div>This Prop Name: {getPropsVal.call(this, 'name')}, This Prop Time: {getPropsVal.call(this, 'time')}</div>
             </div>
