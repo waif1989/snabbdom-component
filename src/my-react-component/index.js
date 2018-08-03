@@ -23,16 +23,14 @@ import AddComponent from '../my-add-component';
         return this.demo.renderCom.call(this, this.demo, React);
     }
 }*/
-const demoComponent = Object.create(AddComponent({name: 'MyAddComponent', frameWork: 'react'})).initCom();
-console.log('demoComponent-----', demoComponent);
-const MyAddComponent = createReactClass ({
-    ...demoComponent,
+const instance = Object.create(AddComponent({name: 'MyAddComponent', frameWork: 'react'})).initCom();
+console.log('instance-----', instance);
+const demoComponent = {
+    ...instance,
     render: function () {
-        // console.log('this-----', this);
-        // return <h1>My name is { this.props.name }</h1>
-        return demoComponent.renderCom.call(this, demoComponent, React);
+        return instance.renderCom.call(this, instance, React);
     }
-    
-});
+};
+const MyAddComponent = createReactClass(demoComponent);
 
 export default MyAddComponent;

@@ -33,20 +33,20 @@ const update = (num) => {
     oldNode = patch(oldNode, newNode);
     console.log('New Html String:---', toHTML(newNode));
 };
-patch(oldNode, newNode);*/
-
-import Vue from 'vue';
-import MyVueComponent from '../my-vue-component';
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import MyReactComponent from '../my-react-component';
-
+patch(oldNode, newNode);
 import {patch} from '../snabbdom-engine';
 import SnabbComponent from '../my-snabb-component';
+let oldNode = document.getElementById('snabbApp');
+let newNode = SnabbComponent({
+    name: 'My Snabbdom',
+    type: 3,
+    num: 0
+});
+console.log('------', newNode);
+patch(oldNode, newNode);*/
 
-
-/*
+/*import Vue from 'vue';
+import MyVueComponent from '../my-vue-component';
 new Vue({
     el: '#vueApp',
     components: {
@@ -58,9 +58,11 @@ new Vue({
     methods: {
     
     }
-});
-*/
+});*/
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import MyReactComponent from '../my-react-component';
 ReactDOM.render(
     <MyReactComponent
         name="myReactPropName"
@@ -68,12 +70,3 @@ ReactDOM.render(
     document.getElementById('reactApp')
 );
 
-
-/*let oldNode = document.getElementById('snabbApp');
-let newNode = SnabbComponent({
-    name: 'My Snabbdom',
-    type: 3,
-    num: 0
-});
-console.log('------', newNode);
-patch(oldNode, newNode);*/

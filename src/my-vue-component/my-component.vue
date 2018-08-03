@@ -75,14 +75,21 @@ export default {
             }
         }*/
         'my-snabb-component': (resolve) => {
-            const demoComponent = Object.create(AddComponent({name: 'MyAddComponent', frameWork: 'vue'})).initCom(); // Auto Init component
-            console.log('demoComponent:', demoComponent);
-            resolve({
+            const instance = Object.create(AddComponent({name: 'MyAddComponent', frameWork: 'vue'})).initCom(); // Auto Init component
+            console.log('instance-----+', instance);
+            const demoComponent = {
+                ...instance,
+                render: function (h) {
+                    return instance.renderCom.call(this, instance, h);
+                }
+            };
+            resolve(demoComponent);
+            /*resolve({
 	            ...demoComponent,
                 render (h) { // If data are changed in component that component will render again
                     return demoComponent.renderCom.call(this, demoComponent, h);
                 }
-            });
+            });*/
         }
 	},
 	methods: {

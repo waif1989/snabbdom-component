@@ -26,19 +26,28 @@ const COMMON_COM = {
                 }
             }
         } else {}
-    },
-    getPropsVal: function (val) {
-        if (!this._reactInternalInstance) {
-            return this[val];
-        } else {
-            return this.props[val];
+        this.getDataStateVal = function (val) {
+            if (frameWork === 'vue') {
+                return this[val];
+            } else if (frameWork === 'react') {
+                return this.state[val];
+            }
+        };
+        this.changeDataStateVal = function (target, newVal) {
+            if (frameWork === 'vue') {
+                this[target] = newVal;
+            } else if (frameWork === 'react') {
+                this.setState({
+                    [target]: newVal
+                });
+            }
         }
-    },
-    getDataStateVal: function (val) {
-        if (!this._reactInternalInstance) {
-            return this[val];
-        } else {
-            return this.state[val];
+        this.getPropsVal = function (val) {
+            if (frameWork === 'vue') {
+                return this[val];
+            } else if (frameWork === 'react') {
+                return this.props[val];
+            }
         }
     },
     getComputedVal: function (val) {

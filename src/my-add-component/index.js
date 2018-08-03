@@ -7,12 +7,14 @@ const ADD_COM_FN = ({
     frameWork = 'dom'
 } = {}) => {
     const data_state = {
-        num: 0
+        num: -1
     };
     const ADD_COM = Object.setPrototypeOf({}, COMMON_COM);
     ADD_COM.initCom = function () {
         this.init(data_state, frameWork);
         this.name = name;
+        const getDataStateVal = this.getDataStateVal;
+        const changeDataStateVal = this.changeDataStateVal;
         this.setPropsVal({
             name: {
                 type: String,
@@ -29,19 +31,30 @@ const ADD_COM_FN = ({
             }
         });
         this.setCreateWillMount(function () {
-            console.log('Component Create:', this.num);
-            this.num = this.num + 1;
+            console.log('Component Create & ComponentWillMount:', getDataStateVal.call(this, 'num'));
+            changeDataStateVal.call(this, 'num', (() => {
+                let temp = getDataStateVal.call(this, 'num');
+                return ++temp;
+            })());
         });
         this.setMountedDidMount(function () {
-            console.log('Component Mounted:', this.num);
+            console.log('Component Mounted & ComponentDidMount:', getDataStateVal.call(this, 'num'));
         });
         this.setMethods({
             add: function () {
-                this.num = this.num + 1;
-                this.$emit('addCb', this.num);
+                changeDataStateVal.call(this, 'num', (() => {
+                    let temp = getDataStateVal.call(this, 'num');
+                    return ++temp;
+                })());
+                // this.num = this.num + 1;
+                // this.$emit('addCb', this.num);
             },
             reduce: function () {
-                this.num = this.num - 1;
+                changeDataStateVal.call(this, 'num', (() => {
+                    let temp = getDataStateVal.call(this, 'num');
+                    return --temp;
+                })());
+                // this.num = this.num - 1;
             }
         });
         return this;
@@ -80,26 +93,30 @@ const ADD_COM_FN = ({
         // return this;
     };
     ADD_COM.renderCom = function (ins = this, h = defaultH) {
+        const getPropsVal = ins.getPropsVal;
+        const invokeFn = ins.invokeFn;
+        const getDataStateVal = ins.getDataStateVal;
+        const getComputedVal = ins.getComputedVal;
         const JSX = (
             <div
                 className="my-component-container"
                 class="my-component-container"
             >
                 <button
-                    className={ins.getPropsVal.call(this, 'name')}
-                    class={ins.getPropsVal.call(this, 'name')}
-                    onClick={ins.invokeFn.call(this, 'add')}
+                    className={getPropsVal.call(this, 'name')}
+                    class={getPropsVal.call(this, 'name')}
+                    onClick={invokeFn.call(this, 'add')}
                 >
                     My Add Component '+' Btn
                 </button>
                 <button
-                    onClick={ins.invokeFn.call(this, 'reduce')}
+                    onClick={invokeFn.call(this, 'reduce')}
                 >
                     My Add Component '-' Btn
                 </button>
-                <div class={{'text-red':ins.getDataStateVal.call(this, 'num') > 2}}>This Data Num: {ins.getDataStateVal.call(this, 'num')}</div>
-                <div>This Computed Num: {ins.getComputedVal.call(this, 'numComputed')}</div>
-                <div>This Prop Name: {ins.getPropsVal.call(this, 'name')}, This Prop Time: {ins.getPropsVal.call(this, 'time')}</div>
+                <div class={{'text-red':getDataStateVal.call(this, 'num') > 2}}>This Data Num: {getDataStateVal.call(this, 'num')}</div>
+                <div>This Computed Num: {getComputedVal.call(this, 'numComputed')}</div>
+                <div>This Prop Name: {getPropsVal.call(this, 'name')}, This Prop Time: {getPropsVal.call(this, 'time')}</div>
             </div>
         );
         return ins.render(JSX);
