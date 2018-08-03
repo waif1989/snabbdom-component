@@ -28,8 +28,9 @@ console.log('demoComponent-----', demoComponent);
 const MyAddComponent = createReactClass ({
     ...demoComponent,
     render: function () {
-        console.log('this-----', this);
-        return <h1>My name is { this.props.name }</h1>
+        // console.log('this-----', this);
+        // return <h1>My name is { this.props.name }</h1>
+        return demoComponent.renderCom.call(this, demoComponent, React);
     }
     
 });

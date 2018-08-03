@@ -11,8 +11,8 @@ const ADD_COM_FN = ({
     };
     const ADD_COM = Object.setPrototypeOf({}, COMMON_COM);
     ADD_COM.initCom = function () {
-        this.name = name;
         this.init(data_state, frameWork);
+        this.name = name;
         this.setPropsVal({
             name: {
                 type: String,

@@ -20,9 +20,6 @@ const COMMON_COM = {
             this.destroyed = function () {};
             this.methods = {};
         } else if (frameWork === 'react') {
-            /*this.state = {
-                ...DEFAULT_DATA
-            }*/
             this.getInitialState = function () {
                 return {
                     ...DEFAULT_DATA
@@ -56,13 +53,23 @@ const COMMON_COM = {
             return this.methods[fnName].bind(this);
         }
     },
-    setPropsVal: function (props, frameWork) {
+    setPropsVal: function (props) {
         if (this.frameWork === 'vue') {
             this.props = props;
         } else if (this.frameWork === 'react') {
+            const temp = {};
+            for (const i in props) {
+                if (typeof props[i] === 'object' && typeof props[i]['default'] !== 'undefined') {
+                    temp[i] = props[i]['default'];
+                } else if (typeof props[i] === 'object' && Array.isArray(props[i])) {
+                    temp[i] = props[i];
+                } else if (typeof props[i] !== 'object' && typeof props[i] !== 'undefined') {
+                    temp[i] = props[i];
+                }
+            }
             this.getDefaultProps = function () {
                 return {
-                    ...props
+                    ...temp
                 }
             }
         }
