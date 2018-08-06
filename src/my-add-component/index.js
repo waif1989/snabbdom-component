@@ -97,14 +97,17 @@ const ADD_COM_FN = ({
         const invokeFn = ins.invokeFn;
         const getDataStateVal = ins.getDataStateVal;
         const getComputedVal = ins.getComputedVal;
+        const directives = [
+            { name: 'className', value: 'text-red', modifiers: { num: true } }
+        ];
         const JSX = (
             <div
                 className="my-component-container"
-                // class="my-component-container"
+                v-className="my-component-container"
             >
                 <button
                     className={getPropsVal.call(this, 'name')}
-                    // class={getPropsVal.call(this, 'name')}
+                    //class={getPropsVal.call(this, 'name')}
                     onClick={invokeFn.call(this, 'add')}
                 >
                     My Add Component '+' Btn
@@ -115,8 +118,8 @@ const ADD_COM_FN = ({
                     My Add Component '-' Btn
                 </button>
                 <div
-                    className={{'text-red':getDataStateVal.call(this, 'num') > 2}}
-                    // class={{'text-red':getDataStateVal.call(this, 'num') > 2}}
+                    className={getDataStateVal.call(this, 'num') > 2 ? 'text-red' : ''}
+                    v-className={{'text-red':getDataStateVal.call(this, 'num') > 2}}
                 >
                     This Data Num: {getDataStateVal.call(this, 'num')}
                 </div>

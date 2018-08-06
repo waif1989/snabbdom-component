@@ -11,4 +11,7 @@ https://babeljs.io/docs/en/babelrc
 https://reactjs.org/docs/introducing-jsx.html
 https://reactjs.org/tutorial/tutorial.html#setup-for-the-tutorial
 https://medium.com/@lailbrown/reactjs-class-components-and-functional-components-5f00edbd5d92
+https://vuejs.org/v2/api/#Vue-directive
+https://vuejs.org/v2/guide/custom-directive.html
+http://imweb.io/topic/570a12a906f2400432c139aa
 ```

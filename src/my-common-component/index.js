@@ -19,6 +19,36 @@ const COMMON_COM = {
             this.beforeDestroy = function () {};
             this.destroyed = function () {};
             this.methods = {};
+            this.directives = {
+                className: {
+                    inserted: function (el, binding) {
+                        if (typeof binding.value === 'object') {
+                            var temp = '';
+                            for (var i in binding.value) {
+                                if (binding.value[i]) {
+                                    temp = temp + i;
+                                }
+                            }
+                            el.setAttribute('class', temp);
+                        } else if (typeof binding.value === 'string') {
+                            el.setAttribute('class', binding.value);
+                        }
+                    },
+                    update: function (el, binding) {
+                        if (typeof binding.value === 'object') {
+                            var temp = '';
+                            for (var i in binding.value) {
+                                if (binding.value[i]) {
+                                    temp = temp + i;
+                                }
+                            }
+                            el.setAttribute('class', temp);
+                        } else if (typeof binding.value === 'string') {
+                            el.setAttribute('class', binding.value);
+                        }
+                    }
+                }
+            }
         } else if (frameWork === 'react') {
             this.getInitialState = function () {
                 return {
@@ -41,7 +71,7 @@ const COMMON_COM = {
                     [target]: newVal
                 });
             }
-        }
+        };
         this.getPropsVal = function (val) {
             if (frameWork === 'vue') {
                 return this[val];
