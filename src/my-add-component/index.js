@@ -10,11 +10,14 @@ const ADD_COM_FN = ({
         num: -1
     };
     const ADD_COM = Object.setPrototypeOf({}, COMMON_COM);
+    const getDataStateVal = ADD_COM.getDataStateVal(frameWork);
+    const updateDataStateVal = ADD_COM.updateDataStateVal(frameWork);
+    const getPropsVal = ADD_COM.getPropsVal(frameWork);
+    const getComputedVal = ADD_COM.getComputedVal(frameWork);
+    const invokeFn = ADD_COM.invokeFn(frameWork);
     ADD_COM.initCom = function () {
         this.init(data_state, frameWork);
         this.name = name;
-        const getDataStateVal = this.getDataStateVal;
-        const updateDataStateVal = this.updateDataStateVal;
         this.setPropsVal({
             name: {
                 type: String,
@@ -58,48 +61,8 @@ const ADD_COM_FN = ({
             }
         });
         return this;
-        // ADD_COM.init.call(this, data_state, frameWork);
-        // ADD_COM.setPropsVal.call(this, {
-        //     name: {
-        //         type: String,
-        //         default: 'defaultPropName'
-        //     },
-        //     time: {
-        //         type: Number,
-        //         default: 1
-        //     }
-        // }, frameWork);
-        // ADD_COM.setComputedVal.call(this, {
-        //     numComputed: function () {
-        //         return this.num * 2;
-        //     }
-        // });
-        // ADD_COM.setCreateWillMount.call(this, function () {
-        //     console.log('Component Create:', this.num);
-        //     this.num = this.num + 1;
-        // });
-        // ADD_COM.setMountedDidMount.call(this, function () {
-        //     console.log('Component Mounted:', this.num);
-        // });
-        // ADD_COM.setMethods.call(this, {
-        //     add: function () {
-        //         this.num = this.num + 1;
-        //         this.$emit('addCb', this.num);
-        //     },
-        //     reduce: function () {
-        //         this.num = this.num - 1;
-        //     }
-        // });
-        // return this;
     };
     ADD_COM.renderCom = function (ins = this, h = defaultH) {
-        const getPropsVal = ins.getPropsVal;
-        const invokeFn = ins.invokeFn;
-        const getDataStateVal = ins.getDataStateVal;
-        const getComputedVal = ins.getComputedVal;
-        const directives = [
-            { name: 'className', value: 'text-red', modifiers: { num: true } }
-        ];
         const JSX = (
             <div
                 className="my-component-container"
@@ -107,7 +70,7 @@ const ADD_COM_FN = ({
             >
                 <button
                     className={getPropsVal.call(this, 'name')}
-                    //class={getPropsVal.call(this, 'name')}
+                    v-className={getPropsVal.call(this, 'name')}
                     onClick={invokeFn.call(this, 'add')}
                 >
                     My Add Component '+' Btn

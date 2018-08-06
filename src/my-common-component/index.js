@@ -56,14 +56,18 @@ const COMMON_COM = {
                 }
             }
         } else {}
-        this.getDataStateVal = function (val) {
+    },
+    getDataStateVal: function (frameWork) {
+        return function (val) {
             if (frameWork === 'vue') {
                 return this[val];
             } else if (frameWork === 'react') {
                 return this.state[val];
             }
-        };
-        this.updateDataStateVal = function (target, newVal) {
+        }
+    },
+    updateDataStateVal: function (frameWork) {
+        return function (target, newVal) {
             if (frameWork === 'vue') {
                 this[target] = newVal;
             } else if (frameWork === 'react') {
@@ -71,8 +75,10 @@ const COMMON_COM = {
                     [target]: newVal
                 });
             }
-        };
-        this.getPropsVal = function (val) {
+        }
+    },
+    getPropsVal: function (frameWork) {
+        return function (val) {
             if (frameWork === 'vue') {
                 return this[val];
             } else if (frameWork === 'react') {
@@ -80,16 +86,20 @@ const COMMON_COM = {
             }
         }
     },
-    getComputedVal: function (val) {
-        if (!this._reactInternalInstance) {
-            return this[val];
+    getComputedVal: function (frameWork) {
+        return function (val) {
+            if (frameWork === 'vue') {
+                return this[val];
+            }
         }
     },
-    invokeFn: function (fnName) {
-        if (!this._reactInternalInstance) {
-            return this[fnName];
-        } else {
-            return this.methods[fnName].bind(this);
+    invokeFn: function (frameWork) {
+        return function (fnName) {
+            if (frameWork === 'vue') {
+                return this[fnName];
+            } else if (frameWork === 'react') {
+                return this.methods[fnName].bind(this);
+            }
         }
     },
     setPropsVal: function (props) {
