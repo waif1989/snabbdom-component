@@ -15,10 +15,15 @@ const ADD_COM_FN = ({
     const getPropsVal = ADD_COM.getPropsVal(frameWork);
     const getComputedVal = ADD_COM.getComputedVal(frameWork);
     const invokeFn = ADD_COM.invokeFn(frameWork);
+    const setComputedVal = ADD_COM.setComputedVal(frameWork);
+    const setPropsVal = ADD_COM.setPropsVal(frameWork);
+    const setCreateWillMount = ADD_COM.setCreateWillMount(frameWork);
+    const setMountedDidMount = ADD_COM.setMountedDidMount(frameWork);
+    const setMethods = ADD_COM.setMethods(frameWork);
     ADD_COM.initCom = function () {
         this.init(data_state, frameWork);
         this.name = name;
-        this.setPropsVal({
+        setPropsVal.call(this, {
             name: {
                 type: String,
                 default: 'defaultPropName'
@@ -28,22 +33,27 @@ const ADD_COM_FN = ({
                 default: 1
             }
         });
-        this.setComputedVal({
+        setComputedVal.call(this, {
             numComputed: function () {
-                return this.num * 2;
+                if (frameWork === 'vue') {
+                    return getDataStateVal.call(this, 'num') * 2;
+                } else {
+                    // debugger;
+                    // return getDataStateVal.call(this, 'num') * 2;
+                }
             }
         });
-        this.setCreateWillMount(function () {
+        setCreateWillMount.call(this, function () {
             console.log('Component Create & ComponentWillMount:', getDataStateVal.call(this, 'num'));
             updateDataStateVal.call(this, 'num', (() => {
                 let temp = getDataStateVal.call(this, 'num');
                 return ++temp;
             })());
         });
-        this.setMountedDidMount(function () {
+        setMountedDidMount.call(this, function () {
             console.log('Component Mounted & ComponentDidMount:', getDataStateVal.call(this, 'num'));
         });
-        this.setMethods({
+        setMethods.call(this, {
             add: function () {
                 updateDataStateVal.call(this, 'num', (() => {
                     let temp = getDataStateVal.call(this, 'num');

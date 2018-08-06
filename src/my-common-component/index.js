@@ -1,7 +1,6 @@
 const COMMON_COM = {
     init: function (DEFAULT_DATA, frameWork) {
         this.name = 'CommonComponent';
-        this.frameWork = frameWork;
         if (frameWork === 'vue') {
             this.props = {};
             this.components = {};
@@ -90,6 +89,9 @@ const COMMON_COM = {
         return function (val) {
             if (frameWork === 'vue') {
                 return this[val];
+            } else if (frameWork === 'react') {
+                // console.log('***', this.computed, val);
+                // return this.computed[val]();
             }
         }
     },
@@ -102,46 +104,56 @@ const COMMON_COM = {
             }
         }
     },
-    setPropsVal: function (props) {
-        if (this.frameWork === 'vue') {
-            this.props = props;
-        } else if (this.frameWork === 'react') {
-            const temp = {};
-            for (const i in props) {
-                if (typeof props[i] === 'object' && typeof props[i]['default'] !== 'undefined') {
-                    temp[i] = props[i]['default'];
-                } else if (typeof props[i] === 'object' && Array.isArray(props[i])) {
-                    temp[i] = props[i];
-                } else if (typeof props[i] !== 'object' && typeof props[i] !== 'undefined') {
-                    temp[i] = props[i];
+    setPropsVal: function (frameWork) {
+        return function (props) {
+            if (frameWork === 'vue') {
+                this.props = props;
+            } else if (frameWork === 'react') {
+                const temp = {};
+                for (const i in props) {
+                    if (typeof props[i] === 'object' && typeof props[i]['default'] !== 'undefined') {
+                        temp[i] = props[i]['default'];
+                    } else if (typeof props[i] === 'object' && Array.isArray(props[i])) {
+                        temp[i] = props[i];
+                    } else if (typeof props[i] !== 'object' && typeof props[i] !== 'undefined') {
+                        temp[i] = props[i];
+                    }
+                }
+                this.getDefaultProps = function () {
+                    return {
+                        ...temp
+                    }
                 }
             }
-            this.getDefaultProps = function () {
-                return {
-                    ...temp
-                }
+        };
+    },
+    setComputedVal: function (frameWork) {
+        return function (computed) {
+            this.computed = computed;
+        }
+    },
+    setCreateWillMount: function (frameWork) {
+        return function (fn) {
+            if (frameWork === 'vue') {
+                this.created = fn;
+            } else if (frameWork === 'react') {
+                this.componentWillMount = fn;
             }
-        }
+        };
     },
-    setComputedVal: function (computed) {
-        this.computed = computed;
+    setMountedDidMount: function (frameWork) {
+        return function (fn) {
+            if (frameWork === 'vue') {
+                this.mounted = fn
+            } else if (frameWork === 'react') {
+                this.componentDidMount = fn;
+            }
+        };
     },
-    setCreateWillMount: function (fn) {
-        if (this.frameWork === 'vue') {
-            this.created = fn;
-        } else if (this.frameWork === 'react') {
-            this.componentWillMount = fn;
-        }
-    },
-    setMountedDidMount: function (fn) {
-        if (this.frameWork === 'vue') {
-            this.mounted = fn
-        } else if (this.frameWork === 'react') {
-            this.componentDidMount = fn;
-        }
-    },
-    setMethods: function (methods) {
-        this.methods = methods;
+    setMethods: function (frameWork) {
+        return function (methods) {
+            this.methods = methods;
+        };
     },
     render: function (JSX) {
         return JSX
